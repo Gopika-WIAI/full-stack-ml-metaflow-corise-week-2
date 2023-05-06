@@ -4,7 +4,7 @@ from metaflow import FlowSpec, step, card
 
 class TFlow4(FlowSpec):
     """
-    train a boosted tree
+    train a decision tree
     """
     @card
     @step
