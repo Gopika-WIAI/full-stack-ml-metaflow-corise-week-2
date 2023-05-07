@@ -6,7 +6,7 @@
 import tensorflow as tf
 from tensorflow.keras import layers, optimizers, regularizers
 from sklearn.base import BaseEstimator, ClassifierMixin
-from sklearn.metrics import accuracy_score, roc_auc_score,f1_score
+from sklearn.metrics import accuracy_score, roc_auc_score
 from sklearn.feature_extraction.text import CountVectorizer
 
 class NbowModel():
@@ -39,7 +39,7 @@ class NbowModel():
         print(X[0])
         res = self.cv.fit_transform(X).toarray()
         self.model.fit(x=res, y=y, batch_size=32, 
-                       epochs=20, validation_split=.2)
+                       epochs=10, validation_split=.2)
     
     def predict(self, X):
         print(X.shape)
@@ -50,6 +50,7 @@ class NbowModel():
     def eval_acc(self, X, labels, threshold=.5):
         return accuracy_score(labels, 
                               self.predict(X) > threshold)
+
     
     def eval_rocauc(self, X, labels):
         return roc_auc_score(labels,  self.predict(X))
