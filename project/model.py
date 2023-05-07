@@ -23,9 +23,9 @@ class NbowModel():
         # Define the keras model
         inputs = tf.keras.Input(shape=(self.vocab_sz,), 
                                 name='input')
-        x = layers.Dropout(0.10)(inputs)
+        x = layers.Dropout(0.25)(inputs)
         x = layers.Dense(
-            15, activation="relu",
+            5, activation="relu",
             kernel_regularizer=regularizers.L1L2(l1=1e-5, l2=1e-4)
         )(x)
         predictions = layers.Dense(1, activation="sigmoid",)(x)
@@ -36,9 +36,9 @@ class NbowModel():
 
     def fit(self, X, y):
         print(X.shape)
-        print(X[0])
+        # print(X[0])
         res = self.cv.fit_transform(X).toarray()
-        self.model.fit(x=res, y=y, batch_size=32, 
+        self.model.fit(x=res, y=y, batch_size=50, 
                        epochs=10, validation_split=.2)
     
     def predict(self, X):
